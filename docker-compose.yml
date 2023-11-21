@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+  back-end:
+    build:
+      context: Backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      spring.profiles.active: prod
+      DB_URL: jdbc:mysql://mysql-container/assignment_submission_db
+      DB_USERNAME: example_user
+      DB_PASSWORD: venkat03
+    depends_on:
+      - mysql-container
+  front-end:
+    build:
+      context: Frontend
+      dockerfile: Dockerfile
+    ports:
+      - 85:3000
+    depends_on:
+      - back-end
+  mysql-container:
+    image: mysql:8.0.28
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: assignment_submission_db
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: venkat03
+
+volumes:
+  db-data:

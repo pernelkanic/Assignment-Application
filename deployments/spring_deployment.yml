@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-end
+  template:
+    metadata:
+      labels:
+        app: back-end
+    spec:
+      containers:
+        - name: back-end
+          image: venkatakrishnanraghavan/spring-backend:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.profiles.active
+              value: prod
+            - name: DB_URL
+              value: jdbc:mysql://mysql-container/assignment_submission_db
+            - name: DB_USERNAME
+              value: example_user
+            - name: DB_PASSWORD
+              value: venkat03
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: back-end
+spec:
+  selector:
+    app: back-end
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort

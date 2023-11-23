@@ -1,10 +1,17 @@
-FROM node:17-alpine3.15 
-# Set working directory
-COPY package.json package-lock.json .
+# build environment
+FROM node:10.3.0 as builder
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+COPY package.json /usr/src/app/package.json
+COPY nginx.conf /nginx.conf
 RUN npm install
+COPY . /usr/src/app
+RUN npm run build
 
-# Copy all files from current directory to working dir in image
-COPY . .
-# install node modules and build assets
-CMD [ "npm" ,"start" ]  
-
+# production environment
+FROM nginx:1.13.9-alpine
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

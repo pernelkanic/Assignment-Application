@@ -19,5 +19,11 @@ pipeline {
       }
     }
 
+    stage('Docker_Tag') {
+      steps {
+        bat 'docker tag Frontend-assign venkatakrishnanraghavan/Frontend-assign:latest'
+      }
+    }
+
   }
 }

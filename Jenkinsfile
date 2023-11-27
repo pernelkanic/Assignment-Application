@@ -13,5 +13,11 @@ pipeline {
       }
     }
 
+    stage('Docker_Build') {
+      steps {
+        bat 'docker build -t Frontend-assign  .'
+      }
+    }
+
   }
 }

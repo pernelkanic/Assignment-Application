@@ -25,5 +25,11 @@ pipeline {
       }
     }
 
+    stage('Docker_push') {
+      steps {
+        bat 'docker push venkatakrishnanraghavan/Frontend-assign:latest'
+      }
+    }
+
   }
 }

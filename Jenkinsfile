@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('buildandpush') {
+      steps {
+        bat 'cd Assignment-Application'
+      }
+    }
+
   }
 }

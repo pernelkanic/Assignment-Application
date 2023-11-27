@@ -8,8 +8,19 @@ pipeline {
     }
 
     stage('buildandpush') {
-      steps {
-        bat 'cd Assignment-Application'
+      parallel {
+        stage('buildandpush') {
+          steps {
+            bat 'cd Assignment-Application'
+          }
+        }
+
+        stage('intofrontend') {
+          steps {
+            bat 'cd Frontend'
+          }
+        }
+
       }
     }
 

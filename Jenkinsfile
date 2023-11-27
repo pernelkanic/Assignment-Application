@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('intofrontend') {
+      steps {
+        bat 'cd Frontend'
+      }
+    }
+
   }
 }

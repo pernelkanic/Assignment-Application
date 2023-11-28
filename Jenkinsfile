@@ -9,13 +9,13 @@ pipeline {
 
     stage('Docker_Build') {
       steps {
-        bat 'docker build -t Frontend-assign  .'
+        bat 'docker build -t frontend-assign  .'
       }
     }
 
     stage('Docker_Tag') {
       steps {
-        bat 'docker tag Frontend-assign venkatakrishnanraghavan/Frontend-assign:latest'
+        bat 'docker tag frontend-assign venkatakrishnanraghavan/frontend-assign:latest'
       }
     }
 

@@ -2,14 +2,19 @@ pipeline {
   agent any
   stages {
     stage('intofrontend') {
-      steps {
-        bat 'cd Frontend'
-      }
-    }
+      parallel {
+        stage('intofrontend') {
+          steps {
+            bat 'cd Frontend'
+          }
+        }
 
-    stage('Docker_Build') {
-      steps {
-        bat 'docker build -t frontend-assign  .'
+        stage('Docker_Build') {
+          steps {
+            bat 'docker build -t frontend-assign  .'
+          }
+        }
+
       }
     }
 

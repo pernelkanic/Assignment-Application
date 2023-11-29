@@ -2,19 +2,14 @@ pipeline {
   agent any
   stages {
     stage('intofrontend') {
-      parallel {
-        stage('intofrontend') {
-          steps {
-            bat 'cd Frontend'
-          }
-        }
+      steps {
+        bat 'cd Frontend'
+      }
+    }
 
-        stage('Docker_Build') {
-          steps {
-            bat 'docker build -t frontend-assign  .'
-          }
-        }
-
+    stage('Docker_Build') {
+      steps {
+        bat 'docker build -t frontend-assign  .'
       }
     }
 
@@ -24,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Docker_push') {
+    stage('Docker_Push') {
       steps {
         bat 'docker push venkatakrishnanraghavan/Frontend-assign:latest'
       }

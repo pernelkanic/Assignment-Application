@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: venkatakrishnanraghavan/front-end-nginx-minikube:latest
+          image: venkatakrishnanraghavan/frontend-spring-assign-app:latest
           ports:
             - containerPort: 80 # Adjusted to match the targetPort in the Service
 ---

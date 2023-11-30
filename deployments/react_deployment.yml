@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: venkatakrishnanraghavan/spring-frontend:1.0
+          image: venkatakrishnanraghavan/front-end-nginx-minikube:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 80 # Adjusted to match the targetPort in the Service
 ---
 apiVersion: v1
 kind: Service
@@ -27,8 +27,6 @@ spec:
     app: frontend-container
   ports:
     - protocol: TCP
-      port: 85
-      targetPort: 3000
+      port: 3000
+      targetPort: 80 # Matched with the containerPort in the Deployment
   type: LoadBalancer
-  
-

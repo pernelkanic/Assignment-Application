@@ -1,17 +1,15 @@
-# build environment
-FROM node:10.3.0 as builder
-RUN mkdir /usr/src/app
+# Build environment
+FROM node:14 as builder
 WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-COPY package.json /usr/src/app/package.json
-COPY nginx.conf /nginx.conf
+COPY package*.json ./
 RUN npm install
-COPY . /usr/src/app
+COPY . .
+COPY nginx.conf /usr/src/app/nginx.conf
 RUN npm run build
 
-# production environment
+# Production environment
 FROM nginx:1.13.9-alpine
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-COPY --from=builder /nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

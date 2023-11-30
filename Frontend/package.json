@@ -1,6 +1,6 @@
 {
   "name": "assingn-app",
-  "proxy": "http://backend-service:8080/",
+  "proxy": "http://192.168.49.2:31516;",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-container
+  template:
+    metadata:
+      labels:
+        app: frontend-container
+    spec:
+      containers:
+        - name: frontend-container
+          image: venkatakrishnanraghavan/front-end-nginx-minikube:latest
+          ports:
+            - containerPort: 80 # Adjusted to match the targetPort in the Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend-container
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 80 # Matched with the containerPort in the Deployment
+  type: LoadBalancer

@@ -44,7 +44,7 @@ const Login =()=>{
 
               
                 <Form style={{marginTop:"15em"}}>
-                <h1 style={{textAlign:"center"}}>Login</h1>
+                <h1 style={{textAlign:"center"}}>Loginnn</h1>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                     <div>
 

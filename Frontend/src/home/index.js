@@ -44,7 +44,7 @@ const HomePage=()=>{
                 
             <div  style={{margin:"2em" , marginTop:"4em"}}  >
            
-            <h1 >Student Dashboard</h1>
+            <h1 >Student Dashhboard</h1>
         
            </div>  
            <div className="assignment-wrapper">
